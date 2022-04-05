@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import EmployeeService from '../services/EmployeeService';
+import RoleService from '../services/RoleService';
 
-class UpdateEmployeeComponent extends Component {
+class CreateRoleComponent extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
+            // step 2
             id: this.props.match.params.id,
             firstName: '',
             lastName: '',
@@ -13,27 +14,40 @@ class UpdateEmployeeComponent extends Component {
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.updateEmployee = this.updateEmployee.bind(this);
+        this.saveOrUpdateRole = this.saveOrUpdateRole.bind(this);
     }
 
+    // step 3
     componentDidMount(){
-        EmployeeService.getEmployeeById(this.state.id).then( (res) =>{
-            let employee = res.data;
-            this.setState({firstName: employee.firstName,
-                lastName: employee.lastName,
-                emailId : employee.emailId
-            });
-        });
-    }
 
-    updateEmployee = (e) => {
+        // step 4
+        if(this.state.id === '_add'){
+            return
+        }else{
+            RoleService.getRoleById(this.state.id).then( (res) =>{
+                let role = res.data;
+                this.setState({firstName: role.firstName,
+                    lastName: role.lastName,
+                    emailId : role.emailId
+                });
+            });
+        }        
+    }
+    saveOrUpdateRole = (e) => {
         e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
-        console.log('employee => ' + JSON.stringify(employee));
-        console.log('id => ' + JSON.stringify(this.state.id));
-        EmployeeService.updateEmployee(employee, this.state.id).then( res => {
-            this.props.history.push('/employees');
-        });
+        let role = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
+        console.log('role => ' + JSON.stringify(role));
+
+        // step 5
+        if(this.state.id === '_add'){
+            RoleService.createRole(role).then(res =>{
+                this.props.history.push('/roles');
+            });
+        }else{
+            RoleService.updateRole(role, this.state.id).then( res => {
+                this.props.history.push('/roles');
+            });
+        }
     }
     
     changeFirstNameHandler= (event) => {
@@ -49,9 +63,16 @@ class UpdateEmployeeComponent extends Component {
     }
 
     cancel(){
-        this.props.history.push('/employees');
+        this.props.history.push('/roles');
     }
 
+    getTitle(){
+        if(this.state.id === '_add'){
+            return <h3 className="text-center">Add Role</h3>
+        }else{
+            return <h3 className="text-center">Update Role</h3>
+        }
+    }
     render() {
         return (
             <div>
@@ -59,7 +80,9 @@ class UpdateEmployeeComponent extends Component {
                    <div className = "container">
                         <div className = "row">
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                <h3 className="text-center">Update Employee</h3>
+                                {
+                                    this.getTitle()
+                                }
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
@@ -78,7 +101,7 @@ class UpdateEmployeeComponent extends Component {
                                                 value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.updateEmployee}>Save</button>
+                                        <button className="btn btn-success" onClick={this.saveOrUpdateRole}>Save</button>
                                         <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                     </form>
                                 </div>
@@ -91,4 +114,4 @@ class UpdateEmployeeComponent extends Component {
     }
 }
 
-export default UpdateEmployeeComponent
+export default CreateRoleComponent
