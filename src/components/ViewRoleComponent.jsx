@@ -24,17 +24,17 @@ class ViewRoleComponent extends Component {
                 <div className = "card col-md-6 offset-md-3">
                     <h3 className = "text-center"> View Role Details</h3>
                     <div className = "card-body">
-                        <div className = "row">
-                            <label> Role First Name: </label>
-                            <div> { this.state.role.firstName }</div>
+                       <div className = "row">
+                            <label> Role Id: </label>
+                            <div> { this.state.role.roleId }</div>
                         </div>
                         <div className = "row">
-                            <label> Role Last Name: </label>
-                            <div> { this.state.role.lastName }</div>
+                            <label> Role Code: </label>
+                            <div> { this.state.role.roleCode }</div>
                         </div>
                         <div className = "row">
-                            <label> Role Email ID: </label>
-                            <div> { this.state.role.emailId }</div>
+                            <label> Role Name: </label>
+                            <div> { this.state.role.roleName }</div>
                         </div>
                     </div>
 
