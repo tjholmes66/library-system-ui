@@ -9,7 +9,7 @@ class RoleService {
     }
 
     createRole(role){
-        return axios.post(ROLE_API_BASE_URL, role);
+        return axios.post(ROLE_API_BASE_URL + "/create", role);
     }
 
     getRoleById(roleId){
