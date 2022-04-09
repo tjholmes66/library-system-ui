@@ -48,6 +48,7 @@ class ListRoleComponent extends Component {
 
                             <thead>
                                 <tr>
+                                    <th> Role Id</th>
                                     <th> Role Code</th>
                                     <th> Role Name</th>
                                     <th> Actions</th>
@@ -58,6 +59,7 @@ class ListRoleComponent extends Component {
                                     this.state.roles.map(
                                         role => 
                                         <tr key = {role.roleId}>
+                                             <td> {role.roleId} </td>
                                              <td> {role.roleCode} </td>
                                              <td> {role.roleName}</td>
                                              <td>
