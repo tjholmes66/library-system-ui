@@ -15,7 +15,7 @@ class ListRoleComponent extends Component {
 
     deleteRole(id){
         RoleService.deleteRole(id).then( res => {
-            this.setState({roles: this.state.roles.filter(role => role.id !== id)});
+            this.setState({roles: this.state.roles.filter(role => role.roleId !== id)});
         });
     }
     viewRole(id){
@@ -48,9 +48,8 @@ class ListRoleComponent extends Component {
 
                             <thead>
                                 <tr>
-                                    <th> Role First Name</th>
-                                    <th> Role Last Name</th>
-                                    <th> Role Email Id</th>
+                                    <th> Role Code</th>
+                                    <th> Role Name</th>
                                     <th> Actions</th>
                                 </tr>
                             </thead>
@@ -58,14 +57,13 @@ class ListRoleComponent extends Component {
                                 {
                                     this.state.roles.map(
                                         role => 
-                                        <tr key = {role.id}>
-                                             <td> { role.firstName} </td>   
-                                             <td> {role.lastName}</td>
-                                             <td> {role.emailId}</td>
+                                        <tr key = {role.roleId}>
+                                             <td> {role.roleCode} </td>
+                                             <td> {role.roleName}</td>
                                              <td>
-                                                 <button onClick={ () => this.editRole(role.id)} className="btn btn-info">Update </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteRole(role.id)} className="btn btn-danger">Delete </button>
-                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewRole(role.id)} className="btn btn-info">View </button>
+                                                 <button onClick={ () => this.editRole(role.roleId)} className="btn btn-info">Update </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.deleteRole(role.roleId)} className="btn btn-danger">Delete </button>
+                                                 <button style={{marginLeft: "10px"}} onClick={ () => this.viewRole(role.roleId)} className="btn btn-info">View </button>
                                              </td>
                                         </tr>
                                     )
