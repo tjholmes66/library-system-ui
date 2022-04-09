@@ -1,0 +1,5 @@
+npm i axios
+npm install react-router-dom
+npm install chokidar
+npm i react-router-dom
+npm install react-bootstrap bootstrap
