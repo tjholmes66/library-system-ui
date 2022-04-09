@@ -7,28 +7,26 @@ class UpdateRoleComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            firstName: '',
-            lastName: '',
-            emailId: ''
+            roleCode: '',
+            roleName: ''
         }
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
+        this.changeRoleCodeHandler = this.changeRoleCodeHandler.bind(this);
+        this.changeRoleNameHandler = this.changeRoleNameHandler.bind(this);
         this.updateRole = this.updateRole.bind(this);
     }
 
     componentDidMount(){
         RoleService.getRoleById(this.state.id).then( (res) =>{
             let role = res.data;
-            this.setState({firstName: role.firstName,
-                lastName: role.lastName,
-                emailId : role.emailId
+            this.setState({roleCode: role.roleCode,
+                roleName: role.roleName
             });
         });
     }
 
     updateRole = (e) => {
         e.preventDefault();
-        let role = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
+        let role = {roleCode: this.state.roleCode, roleName: this.state.roleName};
         console.log('role => ' + JSON.stringify(role));
         console.log('id => ' + JSON.stringify(this.state.id));
         RoleService.updateRole(role, this.state.id).then( res => {
@@ -36,16 +34,12 @@ class UpdateRoleComponent extends Component {
         });
     }
     
-    changeFirstNameHandler= (event) => {
-        this.setState({firstName: event.target.value});
+    changeRoleCodeHandler= (event) => {
+        this.setState({roleCode: event.target.value});
     }
 
-    changeLastNameHandler= (event) => {
-        this.setState({lastName: event.target.value});
-    }
-
-    changeEmailHandler= (event) => {
-        this.setState({emailId: event.target.value});
+    changeRoleNameHandler= (event) => {
+        this.setState({roleName: event.target.value});
     }
 
     cancel(){
@@ -63,19 +57,14 @@ class UpdateRoleComponent extends Component {
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
-                                            <label> First Name: </label>
-                                            <input placeholder="First Name" name="firstName" className="form-control" 
-                                                value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                            <label> Role C0de: </label>
+                                            <input placeholder="Role Code" name="roleCode" className="form-control" 
+                                                value={this.state.roleCode} onChange={this.changeRoleCodeHandler}/>
                                         </div>
                                         <div className = "form-group">
-                                            <label> Last Name: </label>
-                                            <input placeholder="Last Name" name="lastName" className="form-control" 
-                                                value={this.state.lastName} onChange={this.changeLastNameHandler}/>
-                                        </div>
-                                        <div className = "form-group">
-                                            <label> Email Id: </label>
-                                            <input placeholder="Email Address" name="emailId" className="form-control" 
-                                                value={this.state.emailId} onChange={this.changeEmailHandler}/>
+                                            <label> Role Name: </label>
+                                            <input placeholder="Role Name" name="roleName" className="form-control" 
+                                                value={this.state.roleName} onChange={this.changeRoleNameHandler}/>
                                         </div>
 
                                         <button className="btn btn-success" onClick={this.updateRole}>Save</button>

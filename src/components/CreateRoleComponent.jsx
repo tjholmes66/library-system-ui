@@ -56,10 +56,6 @@ class CreateRoleComponent extends Component {
         this.setState({roleName: event.target.value});
     }
 
-    changeEmailHandler= (event) => {
-        this.setState({emailId: event.target.value});
-    }
-
     cancel(){
         this.props.history.push('/roles');
     }

@@ -17,7 +17,7 @@ class RoleService {
     }
 
     updateRole(role, roleId){
-        return axios.put(ROLE_API_BASE_URL + '/' + roleId, role);
+        return axios.put(ROLE_API_BASE_URL + '/update', role);
     }
 
     deleteRole(roleId){
