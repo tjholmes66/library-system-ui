@@ -6,7 +6,7 @@ class UpdateRoleComponent extends Component {
         super(props)
 
         this.state = {
-            id: this.props.match.params.id,
+            roleId: this.props.match.params.id,
             roleCode: '',
             roleName: ''
         }
@@ -16,9 +16,11 @@ class UpdateRoleComponent extends Component {
     }
 
     componentDidMount(){
-        RoleService.getRoleById(this.state.id).then( (res) =>{
+        RoleService.getRoleById(this.state.roleId).then( (res) =>{
             let role = res.data;
-            this.setState({roleCode: role.roleCode,
+            this.setState({
+	            roleId: role.roleId, 
+                roleCode: role.roleCode,
                 roleName: role.roleName
             });
         });
@@ -26,10 +28,10 @@ class UpdateRoleComponent extends Component {
 
     updateRole = (e) => {
         e.preventDefault();
-        let role = {roleCode: this.state.roleCode, roleName: this.state.roleName};
+        let role = {roleId: this.state.roleId, roleCode: this.state.roleCode, roleName: this.state.roleName};
         console.log('role => ' + JSON.stringify(role));
-        console.log('id => ' + JSON.stringify(this.state.id));
-        RoleService.updateRole(role, this.state.id).then( res => {
+        console.log('roleId => ' + JSON.stringify(this.state.roleId));
+        RoleService.updateRole(role, this.state.roleId).then( res => {
             this.props.history.push('/roles');
         });
     }
@@ -55,12 +57,21 @@ class UpdateRoleComponent extends Component {
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
                                 <h3 className="text-center">Update Role</h3>
                                 <div className = "card-body">
+                                
                                     <form>
+                                    
+                                       <div className = "form-group">
+                                            <label> Role Id: </label>
+                                            <input placeholder="Role Id" name="roleId" className="form-control" 
+                                                value={this.state.roleId} readOnly/>
+                                        </div>
+                                    
                                         <div className = "form-group">
-                                            <label> Role C0de: </label>
+                                            <label> Role Code: </label>
                                             <input placeholder="Role Code" name="roleCode" className="form-control" 
                                                 value={this.state.roleCode} onChange={this.changeRoleCodeHandler}/>
                                         </div>
+                                        
                                         <div className = "form-group">
                                             <label> Role Name: </label>
                                             <input placeholder="Role Name" name="roleName" className="form-control" 
@@ -69,7 +80,9 @@ class UpdateRoleComponent extends Component {
 
                                         <button className="btn btn-success" onClick={this.updateRole}>Save</button>
                                         <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
+                                        
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>

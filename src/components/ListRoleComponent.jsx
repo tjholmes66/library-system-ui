@@ -22,7 +22,7 @@ class ListRoleComponent extends Component {
         this.props.history.push(`/view-role/${id}`);
     }
     editRole(id){
-        this.props.history.push(`/add-role/${id}`);
+        this.props.history.push(`/update-role/${id}`);
     }
 
     componentDidMount(){

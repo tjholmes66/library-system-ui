@@ -88,7 +88,7 @@ class CreateRoleComponent extends Component {
                                         
                                         <div className = "form-group">
                                             <label> Role Name: </label>
-                                            <input placeholder="Last Name" name="roleName" className="form-control" 
+                                            <input placeholder="Role Name" name="roleName" className="form-control" 
                                                 value={this.state.roleName} onChange={this.changeRoleNameHandler}/>
                                         </div>
 
