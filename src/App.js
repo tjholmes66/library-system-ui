@@ -20,7 +20,7 @@ function App() {
                           <Route path = "/roles" component = {ListRoleComponent}></Route>
                           <Route path = "/add-role/:id" component = {CreateRoleComponent}></Route>
                           <Route path = "/view-role/:id" component = {ViewRoleComponent}></Route>
-                          {/* <Route path = "/update-role/:id" component = {UpdateRoleComponent}></Route> */}
+                          <Route path = "/update-role/:id" component = {UpdateRoleComponent}></Route>
                     </Switch>
                 </div>
               <FooterComponent />
